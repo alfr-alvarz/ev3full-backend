@@ -24,4 +24,11 @@ export class UsersService {
         return await this.usersRepository.findOneBy({ id });
     }
 
+    async findAll() {
+        return await this.usersRepository.find();
+    }
+    
+    async removeByEmail(correo: string) {
+        return await this.usersRepository.delete({ correo });
+    }
 }
