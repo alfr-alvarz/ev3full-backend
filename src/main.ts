@@ -5,7 +5,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
 
-
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('api');
@@ -24,10 +23,10 @@ async function bootstrap() {
 
   //CONFIGURACIÓN DE SWAGGER
   const config = new DocumentBuilder()
-    .setTitle('API de Encomiendas')
-    .setDescription('Documentación para el sistema de gestión de pedidos')
+    .setTitle('API de Ventas')
+    .setDescription('Documentación para el sistema de ventas')
     .setVersion('1.0')
-    .addTag('encomiendas') // Opcional, para agrupar
+    .addTag('ventas') // Opcional, para agrupar
     .build();
   
   const document = SwaggerModule.createDocument(app, config);
