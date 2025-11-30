@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { DetalleVenta } from "src/detalle-venta/entities/detalle-venta.entity";
 import { User } from "src/users/entities/user.entity";
 import {
@@ -12,9 +13,14 @@ import {
 
 @Entity('ventas')
 export class Venta {
+    @ApiProperty({ example: 501 })
     @PrimaryGeneratedColumn()
     id: number;
 
+    @ApiProperty({ 
+        type: () => User, // Usamos () => User para evitar errores circulares
+        description: 'Usuario que realizó la compra' 
+    })
     @ManyToOne(() => User)
     @JoinColumn({ name: 'user_id' })
     user: User;
@@ -22,6 +28,7 @@ export class Venta {
     @Column({ nullable: true, name: 'user_id' })
     userId: number;
 
+    @ApiProperty({ example: '2025-11-30T14:00:00.000Z' })
     @CreateDateColumn()
     fecha_hora: Date;
 
@@ -34,6 +41,10 @@ export class Venta {
     @Column('int')
     total_iva: number; // Suma de todos los subtotal_iva de los detalles
 
+    @ApiProperty({ 
+        example: 25000, 
+        description: 'Suma total a pagar (incluye impuestos)' 
+    })
     @Column('int')
     total: number; // Suma de todos los subtotal_con_iva (o subtotal + total_iva)
     // -----------------------
@@ -43,6 +54,7 @@ export class Venta {
 
     // cascade: true es VITAL aquí. 
     // Permite que al guardar la Venta, se guarden automáticamente sus detalles.
+    @ApiProperty({ type: () => [DetalleVenta] })
     @OneToMany(() => DetalleVenta, (detalleVenta) => detalleVenta.venta, { cascade: true })
     detalles: DetalleVenta[];
 }

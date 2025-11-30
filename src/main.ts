@@ -27,6 +27,7 @@ async function bootstrap() {
     .setDescription('Documentación para el sistema de ventas')
     .setVersion('1.0')
     .addTag('ventas') // Opcional, para agrupar
+    .addBearerAuth()
     .build();
   
   const document = SwaggerModule.createDocument(app, config);
