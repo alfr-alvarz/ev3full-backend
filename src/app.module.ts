@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
+import { ProductosModule } from './productos/productos.module';
+import { Producto } from './productos/entities/producto.entity';
 
 @Module({
   imports: [
@@ -20,11 +22,12 @@ import { User } from './users/entities/user.entity';
       username: process.env.DB_USERNAME || 'mysql',
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User],
+      entities: [User, Producto],
       synchronize: true,
     }),
     AuthModule,
     UsersModule,
+    ProductosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
