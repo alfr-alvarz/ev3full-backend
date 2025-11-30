@@ -35,7 +35,7 @@ async function bootstrap() {
   // 'docs' es la ruta. Entrar por http://localhost:3000/docs
   //FIN CONFIGURACIÓN SWAGGER
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 8080;
 
   await app.listen(port);
 
