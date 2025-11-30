@@ -1,4 +1,5 @@
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Categoria } from "src/categorias/entities/categoria.entity";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('productos')
@@ -25,6 +26,16 @@ export class Producto {
 
     @Column({ type: 'int', default: 0 })
     stock_actual: number;
+
+    
+    @ManyToOne(() => Categoria, (categoria) => categoria.productos, { 
+        onDelete: 'SET NULL' //si se borra una categoría, productos quedan sin categoría
+    })
+    @JoinColumn({ name: 'categoria_id' })
+    categoria: Categoria;
+
+    @Column({ nullable: true, name: 'categoria_id'})
+    categoriaId: number;
 
     @Column({})
     ruta_imagen: string;

@@ -1,13 +1,22 @@
-import { IsNotEmpty, IsString, MaxLength } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsString, Length, MaxLength } from "class-validator";
 
 export class CreateCategoriaDto {
-    @IsNotEmpty({ message: 'El nombre no puede estar vacío.' })
-    @IsString({ message: 'El nombre debe ser una cadena de texto.' })
-    @MaxLength(30, { message: 'El nombre no puede exceder los 30 caracteres.' })
+    @ApiProperty({
+        example: 'Juguetes',
+        description: 'Nombre único de la categoría. Máximo 30 caracteres.',
+    })
+    @IsString()
+    @IsNotEmpty()
+    @Length(1, 30) // Vital: Tu DB tiene límite de 30. Si mandan 31, fallará SQL.
     nombre: string;
 
-    @IsNotEmpty({ message: 'La descripción no puede estar vacía.' })
-    @IsString({ message: 'La descripción debe ser una cadena de texto.' })
-    @MaxLength(140, { message: 'La descripción no puede exceder los 140 caracteres.' })
+    @ApiProperty({
+        example: 'Juguetes de todos los tamaños y materiales para perros y gatos.',
+        description: 'Breve descripción de la categoría.',
+    })
+    @IsString()
+    @IsNotEmpty()
+    @Length(1, 140) // Validamos el límite de 140 caracteres de tu entidad
     descripcion: string;
 }

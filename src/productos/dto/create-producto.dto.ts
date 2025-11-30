@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min } from "class-validator";
 
 export class CreateProductoDto {
     @ApiProperty({
@@ -31,15 +31,26 @@ export class CreateProductoDto {
     description:
       'IVA expresado como porcentaje. Por ejemplo: 19 para un 19% de IVA.',
   })
-  @IsPositive()
   @IsNumber()
+  @Min(0)
   iva: number;
+
+  @ApiProperty({
+    example: 1,
+    description: 'ID de la categoría a la que pertenece el producto.',
+    required: false // Indica en Swagger que es opcional (POR AHORA)
+  })
+  @IsOptional()
+  @IsNumber() 
+  @IsPositive()
+  categoriaId: number; 
 
   @ApiProperty({
     example: 120,
     description: 'Cantidad disponible actualmente en inventario.',
   })
   @IsNumber()
+  @Min(0)
   stock_actual: number;
 
   @ApiProperty({
