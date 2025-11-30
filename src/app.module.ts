@@ -8,6 +8,8 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { ProductosModule } from './productos/productos.module';
 import { Producto } from './productos/entities/producto.entity';
+import { CategoriasModule } from './categorias/categorias.module';
+import { Categoria } from './categorias/entities/categoria.entity';
 
 @Module({
   imports: [
@@ -22,12 +24,13 @@ import { Producto } from './productos/entities/producto.entity';
       username: process.env.DB_USERNAME || 'mysql',
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Producto],
+      entities: [User, Producto, Categoria],
       synchronize: true,
     }),
     AuthModule,
     UsersModule,
     ProductosModule,
+    CategoriasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
