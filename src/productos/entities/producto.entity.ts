@@ -18,7 +18,7 @@ export class Producto {
 
     //number o float?
     //Debería definirse en otro lado para que aplique automático después?
-    @Column({ type: 'int'})
+    @Column({ type: 'int', default: 0 })
     iva: number; //porcentaje de IVA. Ej: usar 19 o 21
 
     @Column({})
