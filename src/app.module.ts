@@ -14,6 +14,8 @@ import { VentasModule } from './ventas/ventas.module';
 import { DetalleVentaModule } from './detalle-venta/detalle-venta.module';
 import { DetalleVenta } from './detalle-venta/entities/detalle-venta.entity';
 import { Venta } from './ventas/entities/venta.entity';
+import { VentaDiariaModule } from './venta-diaria/venta-diaria.module';
+import { VentaDiaria } from './venta-diaria/entities/venta-diaria.entity';
 
 @Module({
   imports: [
@@ -28,7 +30,7 @@ import { Venta } from './ventas/entities/venta.entity';
       username: process.env.DB_USERNAME || 'mysql',
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Producto, Categoria, DetalleVenta, Venta],
+      entities: [User, Producto, Categoria, DetalleVenta, Venta, VentaDiaria],
       synchronize: true,
     }),
     AuthModule,
@@ -37,6 +39,7 @@ import { Venta } from './ventas/entities/venta.entity';
     CategoriasModule,
     VentasModule,
     DetalleVentaModule,
+    VentaDiariaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

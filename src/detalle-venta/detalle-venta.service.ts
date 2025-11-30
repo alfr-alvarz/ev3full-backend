@@ -10,7 +10,7 @@ export class DetalleVentaService {
     private readonly detalleVentaRepository: Repository<DetalleVenta>,
   ) {}
 
-  // ✅ FIND ALL: Útil para reportes generales o auditoría.
+  // FIND ALL: Útil para reportes generales o auditoría.
   async findAll() {
     return await this.detalleVentaRepository.find({
       relations: {
@@ -23,7 +23,7 @@ export class DetalleVentaService {
     });
   }
 
-  // ✅ FIND ONE: Para ver un detalle específico (poco uso, pero válido)
+  // FIND ONE: Para ver un detalle específico (poco uso, pero válido)
   async findOne(id: number) {
     const detalle = await this.detalleVentaRepository.findOne({
       where: { id },
@@ -40,7 +40,7 @@ export class DetalleVentaService {
     return detalle;
   }
   
-  // ✨ EXTRA: Una función útil para el futuro (Opcional)
+  //  EXTRA: Una función útil para el futuro (Opcional)
   // "Dime todas las veces que se vendió el Producto X"
   async findByProducto(productoId: number) {
     return await this.detalleVentaRepository.find({
