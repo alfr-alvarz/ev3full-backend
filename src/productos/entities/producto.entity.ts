@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('productos')
@@ -9,21 +9,21 @@ export class Producto {
     @Column({ length: 100, unique: true })
     nombre: string;
 
-    @Column({length: 500})
+    @Column({type: 'varchar', length: 500})
     descripcion: string;
 
-    @Column({ })
+    @Column({ type: 'int'})
     precio_base: number; //sin IVA
 
     //number o float?
-    //Debería definirse en otro lado para que aplique automático después
-    @Column({ })
-    iva: number; //porcentaje de IVA
-
-    @Column({ })
-    precio_con_iva: number;
+    //Debería definirse en otro lado para que aplique automático después?
+    @Column({ type: 'int'})
+    iva: number; //porcentaje de IVA. Ej: usar 19 o 21
 
     @Column({})
+    precio_con_iva: number;
+
+    @Column({ type: 'int', default: 0 })
     stock_actual: number;
 
     @Column({})
@@ -31,4 +31,14 @@ export class Producto {
 
     @CreateDateColumn({ name: 'fecha_creacion' })
     fecha_creacion: Date;
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    calcularPrecioConIVA() {
+        //Si iva > 1 tomar como % y pasarlo a decimal, sino dejarlo como está.
+        const ivaDecimal = this.iva > 1 ? this.iva / 100 : this.iva;
+        this.precio_con_iva = Math.round((this.precio_base * (1 + ivaDecimal)));
+    }
+    
+
 }
