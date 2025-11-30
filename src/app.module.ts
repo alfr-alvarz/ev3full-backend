@@ -10,6 +10,10 @@ import { ProductosModule } from './productos/productos.module';
 import { Producto } from './productos/entities/producto.entity';
 import { CategoriasModule } from './categorias/categorias.module';
 import { Categoria } from './categorias/entities/categoria.entity';
+import { VentasModule } from './ventas/ventas.module';
+import { DetalleVentaModule } from './detalle-venta/detalle-venta.module';
+import { DetalleVenta } from './detalle-venta/entities/detalle-venta.entity';
+import { Venta } from './ventas/entities/venta.entity';
 
 @Module({
   imports: [
@@ -24,13 +28,15 @@ import { Categoria } from './categorias/entities/categoria.entity';
       username: process.env.DB_USERNAME || 'mysql',
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Producto, Categoria],
+      entities: [User, Producto, Categoria, DetalleVenta, Venta],
       synchronize: true,
     }),
     AuthModule,
     UsersModule,
     ProductosModule,
     CategoriasModule,
+    VentasModule,
+    DetalleVentaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
