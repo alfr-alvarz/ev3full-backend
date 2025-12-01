@@ -6,10 +6,10 @@
 
 -- 1. TABLA: USERS
 INSERT INTO users (nombre, correo, contrasena, rol) VALUES 
-('Admin Principal', 'admin@tienda.com', '123456', 'admin'),
-('Vendedor Juan', 'juan@tienda.com', '123456', 'vendedor'),
-('Vendedora Maria', 'maria@tienda.com', '123456', 'vendedor'),
-('Supervisor Carlos', 'carlos@tienda.com', '123456', 'supervisor');
+('Admin Principal', 'admin@tienda.com', '123456', 'ADMIN'),
+('Vendedor Juan', 'juan@tienda.com', '123456', 'VENDEDOR'),
+('Vendedora Maria', 'maria@tienda.com', '123456', 'VENDEDOR'),
+('Supervisor Carlos', 'carlos@tienda.com', '123456', 'ADMIN');
 
 -- 2. TABLA: CATEGORIAS
 INSERT INTO categorias (nombre, descripcion) VALUES 
