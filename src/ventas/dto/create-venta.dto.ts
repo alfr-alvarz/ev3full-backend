@@ -1,6 +1,6 @@
 import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CreateDetalleVentaDto } from 'src/detalle-venta/dto/create-detalle-venta.dto';
+import { CreateDetalleVentaDto } from '../../detalle-venta/dto/create-detalle-venta.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 // DTO Principal: Lo que recibe el Controller

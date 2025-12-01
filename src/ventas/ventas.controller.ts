@@ -4,7 +4,7 @@ import { CreateVentaDto } from './dto/create-venta.dto';
 import { UpdateVentaDto } from './dto/update-venta.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Venta } from 'src/ventas/entities/venta.entity';
+import { Venta } from './entities/venta.entity';
 
 @ApiTags('Ventas')
 @Controller('ventas')
