@@ -27,9 +27,11 @@ export class ProductosController {
   }
 
   @Patch(':id')
+  @UseInterceptors(FileInterceptor('imagen'))
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateProductoDto: UpdateProductoDto
+    @Body() updateProductoDto: UpdateProductoDto,
+    @UploadedFile() file?: any,
   ) {
     return this.productosService.update(id, updateProductoDto);
   }
