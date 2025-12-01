@@ -2,11 +2,11 @@ import { BadRequestException, Injectable, InternalServerErrorException, NotFound
 import { CreateVentaDto } from './dto/create-venta.dto';
 import { UpdateVentaDto } from './dto/update-venta.dto';
 import { Venta } from './entities/venta.entity';
-import { DetalleVenta } from 'src/detalle-venta/entities/detalle-venta.entity';
+import { DetalleVenta } from '../detalle-venta/entities/detalle-venta.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Producto } from 'src/productos/entities/producto.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Producto } from '../productos/entities/producto.entity';
+import { User } from '../users/entities/user.entity';
 import { DataSource } from 'typeorm';
 
 @Injectable()
