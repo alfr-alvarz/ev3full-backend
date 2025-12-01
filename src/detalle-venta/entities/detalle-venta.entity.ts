@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, JoinColumn } from 'typeorm';
-import { Producto } from 'src/productos/entities/producto.entity';
-import { Venta } from 'src/ventas/entities/venta.entity';
+import { Producto } from '../../productos/entities/producto.entity';
+import { Venta } from '../../ventas/entities/venta.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 

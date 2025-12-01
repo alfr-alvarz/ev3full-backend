@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { DetalleVenta } from "src/detalle-venta/entities/detalle-venta.entity";
-import { User } from "src/users/entities/user.entity";
+import { DetalleVenta } from '../../detalle-venta/entities/detalle-venta.entity';
+import { User } from '../../users/entities/user.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,
