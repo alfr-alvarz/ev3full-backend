@@ -18,11 +18,11 @@ export class User {
   @Column({nullable: false })
   contrasena: string;
 
-  @ApiProperty({ example: 'CLIENTE', description: 'Rol del usuario en el sistema' })
-  @Column({default: 'CLIENTE'})
+  @ApiProperty({ example: 'VENDEDOR', description: 'Rol del usuario en el sistema' })
+  @Column({default: 'VENDEDOR'})
   rol: string;
 
-  //Lo hago number o string?
+  
   @ApiProperty({ example: '912345678', description: 'Teléfono de contacto' })
   @Column({ nullable: true})
   telefono: number;
