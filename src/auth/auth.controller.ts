@@ -4,6 +4,7 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { RegisterWithRolDto } from './dto/register-with-rol.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -13,6 +14,12 @@ export class AuthController {
     @HttpCode(HttpStatus.CREATED)
     register(@Body() registerDto: RegisterDto){
         return this.authService.register(registerDto);
+    }
+
+    @Post('register-with-rol')
+    @HttpCode(HttpStatus.CREATED)
+    registerWithRol(@Body() registerWithRolDto: RegisterWithRolDto){
+        return this.authService.registerWithRol(registerWithRolDto);
     }
 
     @Post('login')

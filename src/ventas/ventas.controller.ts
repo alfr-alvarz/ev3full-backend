@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards, ParseIntPipe } from '@nestjs/common';
 import { VentasService } from './ventas.service';
 import { CreateVentaDto } from './dto/create-venta.dto';
 import { UpdateVentaDto } from './dto/update-venta.dto';
@@ -25,6 +25,13 @@ export class VentasController {
     return this.ventasService.crearVenta(createVentaDto, user);
   }
   
+  @Get('mis-ventas') // <--- Ruta fija: /ventas/mis-ventas
+  @UseGuards(AuthGuard('jwt')) 
+  async findMisVentas(@Req() req: any) {
+    const user = req.user;
+    return this.ventasService.findVentasByUsuario(user.id);
+  }
+
   @Get()
   findAll() {
     return this.ventasService.findAll();
@@ -34,17 +41,18 @@ export class VentasController {
   @ApiOperation({ summary: 'Obtener detalle de una venta' })
   @ApiResponse({ status: 200, description: 'Venta encontrada.', type: () => Venta })
   @ApiResponse({ status: 404, description: 'Venta no encontrada.' })
-  findOne(@Param('id') id: string) {
-    return this.ventasService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) { 
+    return this.ventasService.findOne(id);
   }
+  
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVentaDto: UpdateVentaDto) {
-    return this.ventasService.update(+id, updateVentaDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateVentaDto: UpdateVentaDto) {
+    return this.ventasService.update(id, updateVentaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ventasService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.ventasService.remove(id);
   }
 }
