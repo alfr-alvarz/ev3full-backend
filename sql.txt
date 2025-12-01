@@ -1,0 +1,58 @@
+-- --------------------------------------------------------
+-- ARCHIVO FINAL DE INSERCIONES DE DATOS
+-- PROYECTO: SISTEMA DE VENTAS (NESTJS + MYSQL)
+-- BASE DE DATOS: test
+-- --------------------------------------------------------
+
+-- 1. TABLA: USERS
+INSERT INTO users (nombre, correo, contrasena, rol) VALUES 
+('Admin Principal', 'admin@tienda.com', '123456', 'admin'),
+('Vendedor Juan', 'juan@tienda.com', '123456', 'vendedor'),
+('Vendedora Maria', 'maria@tienda.com', '123456', 'vendedor'),
+('Supervisor Carlos', 'carlos@tienda.com', '123456', 'supervisor');
+
+-- 2. TABLA: CATEGORIAS
+INSERT INTO categorias (nombre, descripcion) VALUES 
+('Bebidas', 'Refrescos, jugos y aguas'),
+('Snacks', 'Papas fritas, galletas y piqueos'),
+('Lácteos', 'Leches, yogurts y quesos'),
+('Limpieza', 'Detergentes y jabones'),
+('Confitería', 'Chicles, caramelos y chocolates');
+
+-- 3. TABLA: PRODUCTOS
+INSERT INTO productos (id, nombre, descripcion, precio_base, iva, precio_con_iva, stock_actual, categoria_id, ruta_imagen) VALUES 
+(1, 'Coca Cola 3L', 'Bebida gaseosa familiar', 2500, 19, 2975, 50, 1, 'default.jpg'),
+(2, 'Sprite 2L', 'Bebida sabor lima limón', 2000, 19, 2380, 40, 1, 'default.jpg'),
+(3, 'Agua Mineral 1L', 'Agua sin gas', 1000, 19, 1190, 100, 1, 'default.jpg'),
+(4, 'Papas Lays Original', 'Papas fritas saladas', 1500, 19, 1785, 30, 2, 'default.jpg'),
+(5, 'Galletas Oreo', 'Galletas de chocolate', 800, 19, 952, 60, 2, 'default.jpg'),
+(6, 'Leche Colun 1L', 'Leche entera caja', 1200, 19, 1428, 20, 3, 'default.jpg'),
+(7, 'Yogurt Batido', 'Sabor frutilla', 400, 19, 476, 50, 3, 'default.jpg'),
+(8, 'Detergente Omo', 'Detergente en polvo', 5000, 19, 5950, 15, 4, 'default.jpg'),
+(9, 'Jabón Liquido', 'Para manos', 1800, 19, 2142, 25, 4, 'default.jpg'),
+(10, 'Super 8', 'Oblea bañada en chocolate', 300, 19, 357, 200, 5, 'default.jpg');
+
+-- 4. TABLA: VENTAS
+-- 'total' es la suma de los 'subtotal_con_iva' de sus detalles
+INSERT INTO ventas (id, fecha_hora, total, user_id, subtotal, total_iva, metodo_pago) VALUES 
+(1, '2023-11-30 10:00:00', 3927, 2, 3300, 627, 'Efectivo'),
+(2, '2023-11-30 12:30:00', 5950, 2, 5000, 950, 'Debito'),
+(3, '2023-12-01 09:00:00', 714, 3, 600, 114, 'Efectivo');
+
+-- 5. TABLA: DETALLE_VENTA
+INSERT INTO detalle_venta (cantidad, precio_unitario, iva, subtotal_sin_iva, subtotal_iva, subtotal_con_iva, venta_id, producto_id) VALUES 
+-- Detalle Venta 1 (Coca Cola + Oreo)
+(1, 2500, 19, 2500, 475, 2975, 1, 1),
+(1, 800, 19, 800, 152, 952, 1, 5),
+
+-- Detalle Venta 2 (Detergente)
+(1, 5000, 19, 5000, 950, 5950, 2, 8),
+
+-- Detalle Venta 3 (2 Super 8)
+(2, 300, 19, 600, 114, 714, 3, 10);
+
+-- 6. TABLA: VENTA_DIARIA
+-- Columnas confirmadas: fecha, monto_total, user_id
+INSERT INTO venta_diaria (fecha, monto_total, user_id) VALUES 
+('2023-11-30', 9877, 2), -- Suma de ventas del día 30
+('2023-12-01', 714, 3);  -- Suma de ventas del día 01
