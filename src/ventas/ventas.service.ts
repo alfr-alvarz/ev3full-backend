@@ -23,7 +23,7 @@ export class VentasService {
     */
 
     // Inyectamos DataSource para manejar transacciones
-    private readonly dataSource: DataSource, 
+    private readonly dataSource: DataSource,
   ) { }
 
   async crearVenta(crearVentaDto: CreateVentaDto, user: User) {
@@ -36,7 +36,7 @@ export class VentasService {
       // --- DENTRO DE ESTE TRY, TODO SE HACE CON queryRunner.manager ---
 
       const venta = new Venta();
-      venta.user = user; 
+      venta.user = user;
       venta.metodo_pago = crearVentaDto.metodo_pago;
       venta.detalles = [];
 
@@ -68,7 +68,7 @@ export class VentasService {
         const detalle = new DetalleVenta();
         detalle.producto = producto;
         detalle.cantidad = item.cantidad;
-        detalle.precio_unitario_base = producto.precio_base; 
+        detalle.precio_unitario_base = producto.precio_base;
         detalle.iva = producto.iva ? producto.iva : 19; // Fallback a 19 si no hay IVA definido
 
         // Cálculos manuales
@@ -109,10 +109,10 @@ export class VentasService {
       if (error instanceof BadRequestException || error instanceof NotFoundException) {
         throw error; // Re-lanzar errores de lógica (como falta de stock)
       }
-      
+
       console.error('Error en transacción de venta:', error);
       throw new InternalServerErrorException('Error al procesar la venta');
-      
+
     } finally {
       // SIEMPRE liberamos la conexión al final
       await queryRunner.release();
@@ -146,6 +146,23 @@ export class VentasService {
     }
 
     return venta;
+  }
+
+  async findVentasByUsuario(userId: number) {
+    return await this.ventaRepository.find({
+      where: {
+        user: { id: userId }, // <--- Aquí filtramos para que solo traiga las de ese usuario
+      },
+      relations: {
+        // Traemos los detalles para que el usuario pueda ver QUÉ compró en la lista
+        detalles: {
+          producto: true,
+        },
+      },
+      order: {
+        fecha_hora: 'DESC', // Muestra las compras más recientes primero
+      },
+    });
   }
 
   async update(id: number, updateVentaDto: UpdateVentaDto) {
