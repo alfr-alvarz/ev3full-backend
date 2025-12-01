@@ -75,6 +75,11 @@ export class VentasService {
         const precioBase = Number(detalle.precio_unitario_base);
         const ivaPorcentaje = Number(detalle.iva);
 
+        // Precio unitario con IVA (snapshot por unidad)
+        detalle.precio_unitario_con_iva = Math.round(precioBase * (1 + ivaPorcentaje / 100));
+
+        // Subtotal final (usa precio_unitario_con_iva por unidad para evitar desajustes)
+        detalle.subtotal_con_iva = Math.round(detalle.cantidad * detalle.precio_unitario_con_iva);
         detalle.subtotal_sin_iva = Math.round(precioBase * detalle.cantidad);
         detalle.subtotal_iva = Math.round(detalle.subtotal_sin_iva * (ivaPorcentaje / 100));
         detalle.subtotal_con_iva = Math.round(detalle.subtotal_sin_iva + detalle.subtotal_iva);
