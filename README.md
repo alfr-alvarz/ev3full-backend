@@ -15,6 +15,7 @@ Datos para loguearse:
  VENDEDOR_EMAIL = 'juan@tienda.com';
  VENDEDOR_PASS = '123456';
 ```
+**USAR sql.txt PARA HACER INSERCIONES EN LA BD ANTES DE EJECUTAR**
 
 ## Instalación del proyecto
 
