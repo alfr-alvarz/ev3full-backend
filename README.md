@@ -1,3 +1,9 @@
+## Indicaciones del proyecto
+Link del Front-end: https://github.com/fernandocamus/ev3full-frontend/
+Base de Datos hecha en XAMPP con MySQL. Utilizando el puerto 3306. Se conecta a test.
+Este backend tiene como url http://localhost:8080/
+Incluye Swagger para ver los distintos endpoints, y posee dos roles ('ADMIN' y 'VENDEDOR') para definir autorizaciones en los endpoints.
+
 
 ## Instalación del proyecto
 
