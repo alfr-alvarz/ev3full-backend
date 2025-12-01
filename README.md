@@ -7,6 +7,14 @@ Este backend tiene como url http://localhost:8080/
 
 Incluye Swagger para ver los distintos endpoints, y posee dos roles ('ADMIN' y 'VENDEDOR') para definir autorizaciones en los endpoints.
 
+Datos para loguearse:
+```
+ ADMIN_EMAIL = 'admin@tienda.com';
+ ADMIN_PASS = '123456';
+
+ VENDEDOR_EMAIL = 'juan@tienda.com';
+ VENDEDOR_PASS = '123456';
+```
 
 ## Instalación del proyecto
 
