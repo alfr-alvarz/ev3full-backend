@@ -1,4 +1,4 @@
-import { Categoria } from "src/categorias/entities/categoria.entity";
+import { Categoria } from '../../categorias/entities/categoria.entity';
 import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
