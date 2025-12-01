@@ -75,6 +75,13 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+You can run just the sales `VentasService` unit test (this project includes a test which asserts that
+`detalle.precio_unitario_con_iva` is computed and persisted when creating a venta):
+
+```bash
+npx jest src/ventas/ventas.service.spec.ts -i
+```
+
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
