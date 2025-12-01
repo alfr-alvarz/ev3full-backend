@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpCode
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
+import { UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('productos')
 export class ProductosController {
@@ -9,7 +11,8 @@ export class ProductosController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createProductoDto: CreateProductoDto) {
+  @UseInterceptors(FileInterceptor('imagen'))
+  create(@Body() createProductoDto: CreateProductoDto, @UploadedFile() file?: any,) {
     return this.productosService.create(createProductoDto);
   }
 
