@@ -20,7 +20,7 @@ export class VentasController {
   @ApiOperation({ summary: 'Crear una nueva venta', description: 'Descuenta stock y genera snapshots de precios.' })
   @ApiResponse({ status: 201, description: 'Venta creada exitosamente.', type: () => Venta })
   @ApiResponse({ status: 400, description: 'Stock insuficiente o datos inválidos.' })
-  @Roles(Role.VENDEDOR, Role.ADMIN) // <--- 3. Protegemos la ruta (Esto llena req.user)
+  @Roles(Role.VENDEDOR, Role.ADMIN) //  Protegemos la ruta
   create(@Body() createVentaDto: CreateVentaDto, @Req() req: any) {
     
     // req.user es el usuario que extrajo el Guard desde el Token JWT
@@ -30,7 +30,7 @@ export class VentasController {
     return this.ventasService.crearVenta(createVentaDto, user);
   }
   
-  @Get('mis-ventas') // <--- Ruta fija: /ventas/mis-ventas 
+  @Get('mis-ventas')
   async findMisVentas(@Req() req: any) {
     const user = req.user;
     return this.ventasService.findVentasByUsuario(user.id);
